@@ -1,7 +1,5 @@
 __pycache__/
 *.egg-info/
 *.pyc
-modelssimple
-modelssimple_adversary
-modelssimple_tag
+models*
 .DS_Store

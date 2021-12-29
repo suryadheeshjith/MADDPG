@@ -30,7 +30,7 @@ if __name__ == "__main__":
     n_actions = env.action_space[0].n
     maddpg_agents = MADDPG(actor_dims, critic_dims, n_agents, n_actions,
                            fc1=64, fc2=64,
-                           alpha=0.01, beta=0.01, scenario=scenario,
+                           alpha=0.01, beta=0.01, scenario=scenario+'_'+str(MAX_STEPS),
                            chkpt_dir='models')
 
     memory = MultiAgentReplayBuffer(1000000, critic_dims, actor_dims,
