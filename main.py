@@ -4,20 +4,23 @@ from make_env import make_env
 from utils import plot_curve, obs_list_2_state_vector, MultiAgentReplayBuffer
 import sys
 import time
+import argparse
 
 if __name__ == "__main__":
-    # scenario = 'simple'
-    # scenario = 'simple_adversary'
-    # scenario = 'simple_tag'
-    try:
-        scenario = sys.argv[1]
-    except:
-        scenario = 'simples'
+    parser = argparse.ArgumentParser(
+                    description='MADDPG')
+    parser.add_argument('-env', type=str, default='simple',
+                            help='Types : \nsimple_adversary\n \
+                                  simple_tag\n \
+                                  simple')
+    parser.add_argument('-maxsteps', type=int, default=25, help='Max steps per episode')
+    parser.add_argument('-eval', default=False, action="store_true", help='evaluate/load model checkpoint')
+    args = parser.parse_args()
 
-    try:
-        MAX_STEPS = int(sys.argv[2])
-    except:
-        MAX_STEPS = 25
+    scenario = args.env
+    MAX_STEPS = args.maxsteps
+    evaluate = args.eval
+
 
     env = make_env(scenario)
     n_agents = env.n
@@ -40,7 +43,6 @@ if __name__ == "__main__":
     N_GAMES = 50000
     total_steps = 0
     score_history = []
-    evaluate = True
     best_score = 0
 
     if evaluate:
