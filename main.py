@@ -80,7 +80,7 @@ if __name__ == "__main__":
         score_history.append(score)
         avg_score = np.mean(score_history[-100:])
         if not evaluate:
-            if avg_score > best_score:
+            if i > 1000 and avg_score > best_score:
                 maddpg_agents.save_checkpoint()
                 best_score = avg_score
         if i % PRINT_INTERVAL == 0 and i > 0:
