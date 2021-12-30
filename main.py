@@ -83,5 +83,5 @@ if __name__ == "__main__":
             if i > 1000 and avg_score > best_score:
                 maddpg_agents.save_checkpoint()
                 best_score = avg_score
-        if i % PRINT_INTERVAL == 0 and i > 0:
+        if (i % PRINT_INTERVAL == 0 and i > 0) or evaluate:
             print('episode', i, 'average score {:.1f}'.format(avg_score))

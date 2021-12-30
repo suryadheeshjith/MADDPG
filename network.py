@@ -32,7 +32,10 @@ class CriticNetwork(nn.Module):
         T.save(self.state_dict(), self.chkpt_file)
 
     def load_checkpoint(self):
-        self.load_state_dict(T.load(self.chkpt_file+'.zip', map_location={'cuda:0': 'cpu'}))
+        try:
+            self.load_state_dict(T.load(self.chkpt_file, map_location={'cuda:0': 'cpu'}))
+        except:
+            self.load_state_dict(T.load(self.chkpt_file+'.zip', map_location={'cuda:0': 'cpu'}))
 
 
 class ActorNetwork(nn.Module):
@@ -62,4 +65,7 @@ class ActorNetwork(nn.Module):
         T.save(self.state_dict(), self.chkpt_file)
 
     def load_checkpoint(self):
-        self.load_state_dict(T.load(self.chkpt_file+'.zip', map_location={'cuda:0': 'cpu'}))
+        try:
+            self.load_state_dict(T.load(self.chkpt_file, map_location={'cuda:0': 'cpu'}))
+        except:
+            self.load_state_dict(T.load(self.chkpt_file+'.zip', map_location={'cuda:0': 'cpu'}))
